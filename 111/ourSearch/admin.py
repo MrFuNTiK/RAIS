@@ -3,4 +3,6 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(OurUrl)
+admin.site.register(WORDSTable)
+admin.site.register(URLTable)
+admin.site.register(COUNTTable)
