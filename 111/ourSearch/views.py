@@ -6,28 +6,23 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.list import ListView
 from .forms import *
 from .get_text_MY import *
-
+from .add_url import *
+from .update_words import *
+from .find_word import *
 def results(request):
-    counts = COUNTTable.objects.all
-    #count = counts.idurl
-    ourSites = URLTable.objects.all()
-    allWords = []
-    for ourSite in ourSites:
-        site = ourSite.urladress
-        text = text_from_url(site)
+    words = ""
+    if request.method == 'POST':
 
-        text = text.lower()
-        text = remove_spec_signs(text)
-        text = text.replace(' ', '\n')
-        text = remove_short_words(text)
-        text = remove_empty_strings(text)
-
-        words = count_words(text)
-        allWords.append(words)
-    #ourSites = URLTable.objects.all()
+        form = ParseForm(request.POST)
+        allWords = []
+        if form.is_valid():
+            word = form.cleaned_data['word']
+            words = find_word(word)
+            allWords.append(words)
+            
 
     #return render(request, "ourSearch/results.html", {"count": count})
-    return render(request, "ourSearch/results.html", {"words": allWords})
+    return render(request, "ourSearch/results.html", locals())
     #return render(request, "ourSearch/results.html", {"text": text})
     #return render(request, "ourSearch/results.html", {"ourSites": ourSites})
 
@@ -39,28 +34,17 @@ def adminSite(request):
         form = URLForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            #form.clean()
+            url = form.cleaned_data['urladress']
+            add_url(url)
+            update_words(url)
             #return render(request, "ourSearch/adminSite.html", locals())
-        #все что к form2 - пока не работает
-        form2 = ParseForm(request.POST)
-        if form2.is_valid():
-            allWords = []
-            for ourSite in ourSites:
-                site = ourSite.urladress
-                text = text_from_url(site)
-                text = text.lower()
-                text = remove_spec_signs(text)
-                text = text.replace(' ', '\n')
-                text = remove_short_words(text)
-                text = remove_empty_strings(text)
-                words = count_words(text)
-                allWords.append(words)
 
-            form2.save()
 
     return render(request, "ourSearch/adminSite.html", locals())
 
 def index(request):
+
     return render(request, "ourSearch/index.html", locals())
 
 

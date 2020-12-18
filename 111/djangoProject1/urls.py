@@ -23,5 +23,5 @@ urlpatterns = [
     path('oursearch/', include('ourSearch.urls')),
     #path('adminSite/', include('ourSearch.urls'))
     #path('results/', include('ourSearch.urls')),
-    #path('', RedirectView.as_view(url='/oursearch/', permanent=True)),
+    path('', RedirectView.as_view(url='/oursearch/', permanent=True)),
 ]

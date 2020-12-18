@@ -12,5 +12,5 @@ class URLForm(forms.ModelForm):
 class ParseForm(forms.ModelForm):
 
     class Meta:
-        model = COUNTTable
-        fields = ('idurl','idword', 'count',)
+        model = WORDSTable
+        fields = ('word',)

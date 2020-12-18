@@ -20,7 +20,7 @@
           <div class="col">
               <a href="/oursearch" class="btn btn-outline-primary btn-md ">На главную</a>
               <a href="/ourSearch/adminSite" class="btn btn-outline-primary btn-md ">В админку</a>
-              <a href="#" class="btn btn-outline-primary btn-md ">вывод данных</a>
+              <a href="/oursearch/results" class="btn btn-outline-primary btn-md ">вывод данных</a>
           </div>
           <div class="col">
               <form action="" class="inline-form">
@@ -35,6 +35,13 @@
         </div>
       </div>
 </header>
+<form id="worditem_form" method="post" action="">
+
+    {% csrf_token %}
+    {{form}}
+
+    <input type="submit" name="submit" value="Add word" class ="btn btn-primary" />
+</form>
 
 <div class="container">
               <form action="" class="inline-form">
@@ -67,10 +74,10 @@
             {{ text }}
         </p>
     </div>
-    {% for word in words %}
-        <div>{{ word }}</div>
+{% for words in allWords %}
+        <div>{{ words }}</div>
         <br>
-    {% endfor %}
+{% endfor%}
 </div>
 
 <!--
