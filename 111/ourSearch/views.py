@@ -10,15 +10,16 @@ from .add_url import *
 from .update_words import *
 from .find_word import *
 def results(request):
-    words = ""
+    urls = ""
     if request.method == 'POST':
 
         form = ParseForm(request.POST)
-        allWords = []
+
+        #allWords = []
         if form.is_valid():
             word = form.cleaned_data['word']
-            words = find_word(word)
-            allWords.append(words)
+            urls = find_word(word)
+            #allWords.append(words)
             
 
     #return render(request, "ourSearch/results.html", {"count": count})

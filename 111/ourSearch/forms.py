@@ -8,9 +8,8 @@ class URLForm(forms.ModelForm):
     class Meta:
         model = URLTable
         fields = ('urladress',)
-#parseform пока не работает
 class ParseForm(forms.ModelForm):
-
+    
     class Meta:
         model = WORDSTable
         fields = ('word',)

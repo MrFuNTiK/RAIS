@@ -22,6 +22,7 @@
               <a href="/ourSearch/adminSite" class="btn btn-outline-primary btn-md ">В админку</a>
               <a href="/oursearch/results" class="btn btn-outline-primary btn-md ">вывод данных</a>
           </div>
+            <!--
           <div class="col">
               <form action="" class="inline-form">
                   <div class="input-group">
@@ -32,18 +33,22 @@
                   </div>
               </form>
           </div>
+          -->
         </div>
       </div>
 </header>
-<form id="worditem_form" method="post" action="">
-
-    {% csrf_token %}
-    {{form}}
-
-    <input type="submit" name="submit" value="Add word" class ="btn btn-primary" />
-</form>
+<div class="container">
+    <form id="worditem_form" method="post" action="" class="inline-form">
+        <div class="input-group">
+        {% csrf_token %}
+        {{form }}
+        <input type="submit" name="submit" value="Найти" class ="btn btn-primary" />
+        </div>
+    </form>
+</div>
 
 <div class="container">
+<!--
               <form action="" class="inline-form">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
@@ -60,7 +65,8 @@
     </div>
     {% endfor %}
     {{ count }}
-    <h1>Показаны результаты по запросу " "</h1>
+-->
+    <h1>Показаны результаты по запросу "{{ word }}"</h1>
     <h2>Найдено результатов: " "</h2>
     {% for ourSite in ourSites %}
     <div class="container">
@@ -74,9 +80,12 @@
             {{ text }}
         </p>
     </div>
-{% for words in allWords %}
-        <div>{{ words }}</div>
-        <br>
+{% for url in urls %}
+    <div class="container">
+        <div class="row .no-gutters">
+            <a href="{{ url }}">{{ url }} </a>
+        </div>
+    </div>
 {% endfor%}
 </div>
 
