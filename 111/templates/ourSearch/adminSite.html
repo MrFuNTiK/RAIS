@@ -20,35 +20,32 @@
           <div class="col">
               <a href="/oursearch" class="btn btn-outline-primary btn-md ">На главную</a>
               <a href="/ourSearch/adminSite" class="btn btn-outline-primary btn-md ">В админку</a>
-              <a href="/oursearch/results" class="btn btn-outline-primary btn-md ">вывод данных</a>
           </div>
         </div>
       </div>
 </header>
 
 <div class="container">
-<form id="urlitem_form" method="post" action="">
-
+<form id="urlitem_form" method="post" action="" class="inline-form">
+    <div class="input-group">
     {% csrf_token %}
-    {{form}}
+    <input type="url" class="form-control" name="urladress" placeholder="Введите URL" maxlength="200" required="" id="id_urladress" >
+    <input type="submit" name="submit" value="Добавить" class ="btn btn-primary" />
+    </div>
 
-    <input type="submit" name="submit" value="Add URL" class ="btn btn-primary" />
 </form>
-    {% for ourSite in ourSites %}
+        {% for ourSite in ourSites %}
     <div class="container">
         <div class="row .no-gutters">
-            <a href="{{ ourSite.urladress }}">{{ ourSite.idurl }} {{ ourSite.urladress }} </a>
+
+                <a href="{{ ourSite.urladress }}">{{ ourSite.idurl }} {{ ourSite.urladress }} </a>
+                <input type="delete" name="delete" value="Удалить" class ="btn btn-outline-primary btn-sm" />
+
         </div>
     </div>
     {% endfor %}
 </div>
 
-<!--
-{% for ourSite in ourSites %}
-    <a href="{{ ourSite.site }}" >{{ ourSite.id }} {{ ourSite.site }} </a>
-    <br>
-{% endfor %}
--->
 <footer class="fixed-bottom p-3" style="background-color: #eee;">
     <div class="container text-center">
         Создано студентами гр. 736-1

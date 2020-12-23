@@ -9,47 +9,48 @@ from .get_text_MY import *
 from .add_url import *
 from .update_words import *
 from .find_word import *
+from .rm_url import *
 def results(request):
     urls = ""
-    if request.method == 'POST':
-
-        form = ParseForm(request.POST)
-
-        #allWords = []
+    if request.method == 'GET':
+        form = ParseForm(request.GET)
         if form.is_valid():
             word = form.cleaned_data['word']
             urls = find_word(word)
-            #allWords.append(words)
-            
 
-    #return render(request, "ourSearch/results.html", {"count": count})
+    if request.method == 'POST':
+        form = ParseForm(request.POST)
+        if form.is_valid():
+            word = form.cleaned_data['word']
+            urls = find_word(word)
+
     return render(request, "ourSearch/results.html", locals())
-    #return render(request, "ourSearch/results.html", {"text": text})
-    #return render(request, "ourSearch/results.html", {"ourSites": ourSites})
 
 def adminSite(request):
     ourSites = URLTable.objects.all()
-    #urls = get_object_or_404(URLTable)
     if request.method == 'POST':
+        #if 'delete' in request.POST:
+            
 
         form = URLForm(request.POST)
-
         if form.is_valid():
             #form.clean()
             url = form.cleaned_data['urladress']
             add_url(url)
             update_words(url)
-            #return render(request, "ourSearch/adminSite.html", locals())
+            #return render(request, "ourSearch/results.html", locals())
 
 
     return render(request, "ourSearch/adminSite.html", locals())
 
 def index(request):
+    if request.method == 'GET':
+        form = ParseForm(request.GET)
+        if form.is_valid():
+            word = form.cleaned_data['word']
+            urls = find_word(word)
+            return redirect('results', locals())
 
     return render(request, "ourSearch/index.html", locals())
 
 
-#class OurUrlView(ListView):
-   # model = OurUrl
-    #template_name = 'ourSearch/index.html'
-    #context_object_name = "ourUrls"

@@ -20,66 +20,26 @@
           <div class="col">
               <a href="/oursearch" class="btn btn-outline-primary btn-md ">На главную</a>
               <a href="/ourSearch/adminSite" class="btn btn-outline-primary btn-md ">В админку</a>
-              <a href="/oursearch/results" class="btn btn-outline-primary btn-md ">вывод данных</a>
           </div>
-            <!--
+
           <div class="col">
-              <form action="" class="inline-form">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                  <div class="input-group-append">
-                    <button class="btn btn-success" type="button">Найти</button>
-                  </div>
-                  </div>
-              </form>
+            <form id="worditem_form" method="post" action="" class="inline-form">
+                 <div class="input-group">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Введите поисковый запрос" name="word" maxlength="11" required="" id="id_word" class="form-control">
+                    <input type="submit" name="submit" value="Найти" class ="btn btn-primary" />
+                 </div>
+            </form>
           </div>
-          -->
+          
         </div>
       </div>
 </header>
-<div class="container">
-    <form id="worditem_form" method="post" action="" class="inline-form">
-        <div class="input-group">
-        {% csrf_token %}
-        {{form }}
-        <input type="submit" name="submit" value="Найти" class ="btn btn-primary" />
-        </div>
-    </form>
-</div>
 
 <div class="container">
-<!--
-              <form action="" class="inline-form">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                  <div class="input-group-append">
-                    <button class="btn btn-success" type="button">Добавить</button>
-                  </div>
-                  </div>
-              </form>
-    {% for count in counts %}
-    <div>
-        <br>url:{{ count.idurl }}
-        <br>idword:{{ count.idword }}
-        <br>count:{{ count.count }}
-    </div>
-    {% endfor %}
-    {{ count }}
--->
+
     <h1>Показаны результаты по запросу "{{ word }}"</h1>
-    <h2>Найдено результатов: " "</h2>
-    {% for ourSite in ourSites %}
-    <div class="container">
-        <div class="row .no-gutters">
-            <a href="{{ ourSite.urladress }}">{{ ourSite.idurl }} {{ ourSite.urladress }} </a>
-        </div>
-    </div>
-    {% endfor %}
-    <div>
-        <p>
-            {{ text }}
-        </p>
-    </div>
+    <!--<h2>Найдено результатов: " "</h2>-->
 {% for url in urls %}
     <div class="container">
         <div class="row .no-gutters">
@@ -89,12 +49,7 @@
 {% endfor%}
 </div>
 
-<!--
-{% for ourSite in ourSites %}
-    <a href="{{ ourSite.site }}" >{{ ourSite.id }} {{ ourSite.site }} </a>
-    <br>
-{% endfor %}
--->
+
 <footer class="fixed-bottom p-3" style="background-color: #eee;">
     <div class="container text-center">
         Создано студентами гр. 736-1

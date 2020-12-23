@@ -4,7 +4,7 @@ import os
 from bs4 import BeautifulSoup
 import requests
 import itertools
-import sqlite3
+import pymysql
 
 #Возвращает html-код страницы по адресу url в виде объекта Beautiful soup
 #Или не так. Нашел в интернете, главное, что работает
@@ -124,7 +124,7 @@ def update_words(url):
     #=====================MAIN======================#
 
 
-    conn = sqlite3.connect("db.sqlite3")
+    conn = pymysql.connect("212.192.123.98", "736_4", "L%jE6gQ1bx", "736_4")
     cursor = conn.cursor()
 
     #Проверяем, есть ли вообще ссылки в бд
@@ -162,21 +162,21 @@ def update_words(url):
         for j in range(len(words[0])):          #проходим по словам из ссылки
             word = []
             word.append(words[0][j])            #ищем j-ое слово из i-ой ссылки в базе данных слов
-            sql = "SELECT idword FROM ourSearch_wordstable WHERE word=?"
+            sql = "SELECT idword FROM ourSearch_wordstable WHERE word=%s"
             cursor.execute(sql, word)
             ID = cursor.fetchall()
             if len(ID) == 0:                    #если ID пустой (слово не найдено)
-                sql = "INSERT INTO ourSearch_wordstable(word) VALUES(?)"    #добавляем это слово в бд слов
-                cursor.execute(sql, word)
+                sql = "INSERT INTO ourSearch_wordstable(word) VALUES(%s)"    #добавляем это слово в бд слов
+                cursor.execute(sql, (word,))
                 conn.commit()
                 #снова обращаемся к бд и достаем ID только вставленного слова
-                sql = "SELECT idword FROM ourSearch_wordstable WHERE word=?"
+                sql = "SELECT idword FROM ourSearch_wordstable WHERE word=%s"
                 cursor.execute(sql, word)
                 ID = cursor.fetchall()
 
             #ID ссылки знаем, ID слова знаем, количество слов знаем, можно вставлять в бд
             wordsInUrl = (words[1][j], urls[i][1], ID[0][0])
-            sql = "INSERT INTO ourSearch_counttable(count,idurl_id,idword_id)VALUES(?,?,?)"
+            sql = "INSERT INTO ourSearch_counttable(count,idurl_id,idword_id)VALUES(%s,%s,%s)"
             cursor.execute(sql, wordsInUrl)
             conn.commit()
 

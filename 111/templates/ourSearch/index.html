@@ -20,31 +20,25 @@
           <div class="col">
               <a href="/oursearch" class="btn btn-outline-primary btn-md ">На главную</a>
               <a href="/ourSearch/adminSite" class="btn btn-outline-primary btn-md ">В админку</a>
-              <a href="/oursearch/results" class="btn btn-outline-primary btn-md ">вывод данных</a>
           </div>
 
         </div>
       </div>
 </header>
-
-<div class="container">
-<!--    <h1 class="text-center">Добро пожаловать на главную страницу нашей поисковой системы!</h1>-->
-        <form action="" class="inline-form">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="">
-                    <div class="input-group-append">
-                        <button class="btn btn-success" type="button">Найти</button>
-                    </div>
-            </div>
-        </form>
+<div style="height: 100vh;">
+<div style="padding-top: 30vh;">
+<div class="container align-middle" >
+    <form id="worditem_form" method="get" action="/oursearch/results" class="inline-form">
+        <div class="input-group">
+        {% csrf_token %}
+        <input type="text" name="word" placeholder="Введите поисковый запрос"  maxlength="11" required="" id="id_word" class="form-control">
+        <input type="submit" name="submit" value="Найти" class ="btn btn-primary" />
+        </div>
+    </form>
+</div>
+</div>
 </div>
 
-<!--
-{% for ourSite in ourSites %}
-    <a href="{{ ourSite.site }}" >{{ ourSite.id }} {{ ourSite.site }} </a>
-    <br>
-{% endfor %}
--->
 <footer class="fixed-bottom p-3" style="background-color: #eee;">
     <div class="container text-center">
         Создано студентами гр. 736-1

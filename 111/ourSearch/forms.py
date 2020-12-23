@@ -8,6 +8,10 @@ class URLForm(forms.ModelForm):
     class Meta:
         model = URLTable
         fields = ('urladress',)
+        #widgets = {
+        #    'urladress': forms.URLInput(attrs={'class': 'col-md-12 form-control'}),
+        #}
+
 class ParseForm(forms.ModelForm):
     
     class Meta:
