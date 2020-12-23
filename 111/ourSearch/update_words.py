@@ -8,7 +8,7 @@ import pymysql
 
 #Возвращает html-код страницы по адресу url в виде объекта Beautiful soup
 #Или не так. Нашел в интернете, главное, что работает
-def update_words(url):
+def update_words():
     def get_page(url):
         req = requests.get(url)
 
