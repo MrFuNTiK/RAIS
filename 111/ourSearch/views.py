@@ -29,15 +29,14 @@ def results(request):
 def adminSite(request):
     ourSites = URLTable.objects.all()
     if request.method == 'POST':
-        #if 'delete' in request.POST:
-            
+        if 'update' in request.POST:
+                update_words()
 
         form = URLForm(request.POST)
         if form.is_valid():
             #form.clean()
             url = form.cleaned_data['urladress']
             add_url(url)
-            update_words(url)
             #return render(request, "ourSearch/results.html", locals())
 
 
@@ -53,4 +52,6 @@ def index(request):
 
     return render(request, "ourSearch/index.html", locals())
 
+def auth(request):
 
+    return render(request, "ourSearch/auth.html", locals())

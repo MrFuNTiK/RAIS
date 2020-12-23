@@ -34,6 +34,10 @@
     </div>
 
 </form>
+<form method="post" action="" class="inline-form">
+    {% csrf_token %}
+    <input type="submit" name="update" value="Обновить" class ="btn btn-primary" />
+</form>
         {% for ourSite in ourSites %}
     <div class="container">
         <div class="row .no-gutters">
