@@ -8,4 +8,6 @@ urlpatterns = [
     #path('results/', views.results, name='results'),
     path('adminSite/', views.adminSite, name='adminSite'),
     url(r'^results/$', views.results, name='results'),
+    url(r'^auth/$', views.auth, name='auth'),
+    #url(r'^logout/$', 'django.contrib.auth.views.logout', name='logout'),
 ]

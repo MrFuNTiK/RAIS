@@ -1,9 +1,10 @@
 from django import forms
 from django.forms import ModelForm
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class URLForm(forms.ModelForm):
-    #urladress = forms.URLField(max_length=200)
 
     class Meta:
         model = URLTable
@@ -17,3 +18,18 @@ class ParseForm(forms.ModelForm):
     class Meta:
         model = WORDSTable
         fields = ('word',)
+
+class UpdForm(forms.ModelForm):
+    class Meta:
+        model = WORDSTable
+        fields = ('word',)
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+class DeleteURLForm(forms.Form):
+    url = forms.URLField()
+    class Meta:
+        model = URLTable
+        fields = ('urladress',)
