@@ -18,35 +18,47 @@
       <div class="container">
         <div class="row">
           <div class="col">
+              <div class="input-group">
               <a href="/oursearch" class="btn btn-outline-primary btn-md ">На главную</a>
               <a href="/ourSearch/adminSite" class="btn btn-outline-primary btn-md ">В админку</a>
+              <form method="post" action="" class="inline-form">
+                    {% csrf_token %}
+                    <input type="submit" name="logout" value="Выйти" class ="btn btn-outline-primary" />
+                </form>
+              </div>
           </div>
         </div>
       </div>
 </header>
 
 <div class="container">
+
 <form id="urlitem_form" method="post" action="" class="inline-form">
     <div class="input-group">
     {% csrf_token %}
     <input type="url" class="form-control" name="urladress" placeholder="Введите URL" maxlength="200" required="" id="id_urladress" >
     <input type="submit" name="submit" value="Добавить" class ="btn btn-primary" />
     </div>
+</form>
+<div class="input-group">
+    <form method="post" action="" class="inline-form">
+        {% csrf_token %}
+        <input type="submit" name="update" value="Обновить" class ="btn btn-outline-primary" />
+    </form>
+    <form method="post" action="" class="inline-form">
+        {% csrf_token %}
+        <input type="submit" name="view" value="Показать ссылки" class ="btn btn-outline-primary" />
+    </form>
+</div>
 
-</form>
-<form method="post" action="" class="inline-form">
-    {% csrf_token %}
-    <input type="submit" name="update" value="Обновить" class ="btn btn-primary" />
-</form>
         {% for ourSite in ourSites %}
-    <div class="container">
-        <div class="row .no-gutters">
-
-                <a href="{{ ourSite.urladress }}">{{ ourSite.idurl }} {{ ourSite.urladress }} </a>
-                <input type="delete" name="delete" value="Удалить" class ="btn btn-outline-primary btn-sm" />
-
-        </div>
-    </div>
+            <form action="." method="post" class="inline-form">
+                <div class="input-group">
+                <input type="url" readonly name="url" required id="id_url" class="form-control" value="{{ ourSite.urladress }}">
+                {% csrf_token %}
+                <input type="submit" name="delete" value="Удалить" class ="btn btn-primary">
+                </div>
+            </form>
     {% endfor %}
 </div>
 
