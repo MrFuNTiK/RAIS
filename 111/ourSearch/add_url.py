@@ -2,7 +2,7 @@
 import pymysql
 import requests
 
-
+def add_url(url):
 """
 def get_page(url):
     req = requests.get(url)
@@ -10,24 +10,23 @@ def get_page(url):
     if req.status_code == 200:
     return None
 """
-url = "https://timetable.tusur.ru/faculties/fb/groups/736-1"
-req = requests.get(url)
-if req.status_code == 200:      #если ссылка рабочая, то добавляем в бд
+    req = requests.get(url)
+    if req.status_code == 200:      #если ссылка рабочая, то добавляем в бд
 
-    #ДОБАВЛЕНИЕ ЧЕРЕЗ SQLITE3
-    #cursor = connection.cursor()
-    conn = pymysql.connect("212.192.123.98", "736_4", "L%jE6gQ1bx", "736_4")
-    cursor = conn.cursor()
+        #ДОБАВЛЕНИЕ ЧЕРЕЗ SQLITE3
+        #cursor = connection.cursor()
+        conn = pymysql.connect("212.192.123.98", "736_4", "L%jE6gQ1bx", "736_4")
+        cursor = conn.cursor()
 
-    dataToAdd = (url,)
+        dataToAdd = (url,)
 
-    sql = "INSERT INTO ourSearch_urltable(urladress) VALUES(%s)"
-    cursor.execute(sql, dataToAdd)
-    conn.commit()
-    conn.close()
+        sql = "INSERT INTO ourSearch_urltable(urladress) VALUES(%s)"
+        cursor.execute(sql, dataToAdd)
+        conn.commit()
+        conn.close()
 
 
-    
-    print("New url successfully added")
-else:                           #иначе ошибка
-    print("Bad url")
+        
+        print("New url successfully added")
+    else:                           #иначе ошибка
+        print("Bad url")
