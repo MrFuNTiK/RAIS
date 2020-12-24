@@ -3,13 +3,7 @@ import pymysql
 #import requests
 
 def rm_url(url):
-"""
-def get_page(url):
-    req = requests.get(url)
 
-    if req.status_code == 200:
-    return None
-"""
     dataToSearch = (url,)
 
 
@@ -25,4 +19,5 @@ def get_page(url):
         sql = "DELETE FROM ourSearch_urltable WHERE idurl=%s"
         cursor.execute(sql, urlToRemove)
         conn.commit()
-        conn.close()
+    conn.close()
+

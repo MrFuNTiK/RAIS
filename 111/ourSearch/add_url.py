@@ -3,13 +3,6 @@ import pymysql
 import requests
 
 def add_url(url):
-"""
-def get_page(url):
-    req = requests.get(url)
-
-    if req.status_code == 200:
-    return None
-"""
     req = requests.get(url)
     if req.status_code == 200:      #если ссылка рабочая, то добавляем в бд
 
@@ -30,3 +23,4 @@ def get_page(url):
         print("New url successfully added")
     else:                           #иначе ошибка
         print("Bad url")
+

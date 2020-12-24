@@ -181,3 +181,4 @@ def update_words():
             conn.commit()
             
     conn.close()
+
